@@ -21,7 +21,6 @@
      
     <context:annotation-config />
      
-    <context:component-scan base-package="web.spring.jpa.*" />
      
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -41,9 +40,24 @@
         </property>
     </bean>
      
-    <jpa:repositories base-package="web.spring.jpa.*" />
+    <jpa:repositories base-package="jp.co.pekanazawa.auth.domain.repository" />
      
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
+    
+    <!-- message source -->
+	<bean id="messageSource"
+	             class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	     <property name="basename" value="classpath:/i18n/message"/>
+	     <property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+    <context:component-scan base-package="jp.co.pekanazawa.auth.domain.*" >
+        <context:exclude-filter type="regex" expression=".*Service$"/>
+    </context:component-scan>
+    <context:component-scan base-package="jp.co.pekanazawa.auth.web.*" >
+        <context:exclude-filter type="regex" expression=".*Form$"/>
+    </context:component-scan>
+
 </beans>

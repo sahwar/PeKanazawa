@@ -1,4 +1,4 @@
-package web.spring.jpa.entity;
+package jp.co.pekanazawa.auth.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

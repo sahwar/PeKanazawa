@@ -19,6 +19,6 @@
         <property name="suffix" value=".jsp" />
     </bean>
      
-    <context:component-scan base-package="web.spring.jpa.*" />
+    <context:component-scan base-package="jp.co.pekanazawa.*" />
      
 </beans>

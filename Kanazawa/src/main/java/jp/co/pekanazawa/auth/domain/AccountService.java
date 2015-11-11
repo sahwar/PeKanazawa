@@ -1,12 +1,12 @@
-package web.spring.jpa.service;
+package jp.co.pekanazawa.auth.domain;
 
 import java.util.List;
 
+import jp.co.pekanazawa.auth.domain.model.Account;
+import jp.co.pekanazawa.auth.domain.repository.AccountRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import web.spring.jpa.entity.Account;
-import web.spring.jpa.repository.AccountRepository;
 
 @Service
 public class AccountService {
@@ -16,4 +16,5 @@ public class AccountService {
 	public List<Account> findAll() {
 		return this.accountRepository.findAll();
 	}
+
 }
