@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
-	@Autowired
-	private AccountRepository accountRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	public List<Account> findAll() {
-		return this.accountRepository.findAll();
-	}
+    public List<Account> findAll() {
+        return this.accountRepository.findAll();
+    }
+
+    public Account findAccount(String userId) {
+        return this.accountRepository.findOne(Integer.valueOf(userId));
+    }
 
 }
