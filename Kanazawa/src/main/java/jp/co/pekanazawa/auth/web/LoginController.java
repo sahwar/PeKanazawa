@@ -5,7 +5,8 @@ import java.util.Locale;
 import jp.co.pekanazawa.auth.domain.AuthService;
 import jp.co.pekanazawa.auth.domain.model.Auth;
 import jp.co.pekanazawa.auth.web.form.AuthForm;
-import jp.co.pekanazawa.component.login.LoginDto;
+import jp.co.pekanazawa.common.login.LoginDto;
+import jp.co.pekanazawa.common.util.MessageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import utility.MessageUtil;
 
 @Controller
 @RequestMapping("login")

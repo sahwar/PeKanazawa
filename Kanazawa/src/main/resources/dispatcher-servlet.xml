@@ -25,7 +25,6 @@
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <aop:aspectj-autoproxy />
-    <context:component-scan base-package="jp.co.pekanazawa.component" />
 
     <bean id="tilesConfigurer"
         class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">

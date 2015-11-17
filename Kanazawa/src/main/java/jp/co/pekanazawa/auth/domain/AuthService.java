@@ -4,14 +4,13 @@ import java.util.List;
 
 import jp.co.pekanazawa.auth.domain.model.Auth;
 import jp.co.pekanazawa.auth.domain.repository.AuthRepository;
+import jp.co.pekanazawa.common.util.PageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import utility.PageUtil;
 
 @Service
 public class AuthService {
@@ -31,5 +30,9 @@ public class AuthService {
 
     public Page<Auth> findList(int page, List<String> sortKey, Sort.Direction sortType) {
         return this.authRepository.findAll(new PageRequest(page, PageUtil.PAGE_NUM));
+    }
+
+    public Auth findLoginId(String loginId) {
+        return this.authRepository.findByLoginId(loginId);
     }
 }

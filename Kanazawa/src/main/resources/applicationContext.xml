@@ -34,7 +34,7 @@
 	<context:component-scan base-package="jp.co.pekanazawa.auth.web" >
 	</context:component-scan>
     <aop:aspectj-autoproxy />
-    <context:component-scan base-package="jp.co.pekanazawa.component" />
+    <context:component-scan base-package="jp.co.pekanazawa.common.login" />
 
     <!-- Resource定義 -->
     <util:map id="noRedirectUrlAndMethodMap" map-class="java.util.HashMap">

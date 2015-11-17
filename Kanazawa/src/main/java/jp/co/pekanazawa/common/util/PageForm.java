@@ -1,4 +1,4 @@
-package utility;
+package jp.co.pekanazawa.common.util;
 
 import org.springframework.data.domain.Page;
 

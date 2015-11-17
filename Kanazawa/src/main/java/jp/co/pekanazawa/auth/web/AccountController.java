@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import jp.co.pekanazawa.auth.domain.AccountService;
 import jp.co.pekanazawa.auth.domain.model.Account;
+import jp.co.pekanazawa.common.util.MessageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import utility.MessageUtil;
 
 @Controller
 @RequestMapping("account")

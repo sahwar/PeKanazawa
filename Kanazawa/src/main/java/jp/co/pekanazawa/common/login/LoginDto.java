@@ -1,4 +1,4 @@
-package jp.co.pekanazawa.component.login;
+package jp.co.pekanazawa.common.login;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

@@ -1,4 +1,4 @@
-package utility;
+package jp.co.pekanazawa.common.util;
 
 public class UrlUtil {
     private static final String REDIRECT_TO = "redirect:";

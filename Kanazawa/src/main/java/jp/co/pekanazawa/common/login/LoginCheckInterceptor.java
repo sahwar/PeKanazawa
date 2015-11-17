@@ -1,17 +1,17 @@
-package jp.co.pekanazawa.component.login;
+package jp.co.pekanazawa.common.login;
 
 import java.util.Map;
 
 import javax.annotation.Resource;
+
+import jp.co.pekanazawa.common.util.ConstUtil;
+import jp.co.pekanazawa.common.util.UrlUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import utility.ConstUtil;
-import utility.UrlUtil;
 
 @Component
 @Aspect

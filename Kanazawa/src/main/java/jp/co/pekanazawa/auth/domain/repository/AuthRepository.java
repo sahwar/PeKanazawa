@@ -11,4 +11,6 @@ public interface AuthRepository extends JpaRepository<Auth, Integer> {
     public Auth findByLoginIdAndPass(String loginId, String pass);
 
     public Auth findById(int id);
+
+    public Auth findByLoginId(String loginId);
 }

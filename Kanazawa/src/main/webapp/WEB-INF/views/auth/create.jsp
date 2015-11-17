@@ -1,27 +1,39 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>TODO </title>
-<link href="<c:url value="/resources/css/common.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-</head>
-<body>
-    <div id ="error">
-        <form:errors path="loinId" />
-        <form:errors path="pass" />
+<div class="row">
+     <div class="col-sm-push-2 col-sm-10"><h1><spring:message code="web.label.create"/></h1></div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form:form modelAttribute="authForm" action="create" class="form-horizontal cst-form-inputform">
+			<spring:hasBindErrors name="authForm">
+	            <div class="alert alert-danger">
+				    <spring:bind path="authForm">
+				      <c:forEach items="${errors.fieldErrors}" var="error">
+                        <p><spring:message message="${error}" /></p>
+				      </c:forEach>
+				    </spring:bind>
+	            </div>
+            </spring:hasBindErrors>
+                            
+            <label for="code" class="control-label col-sm-2"><spring:message code="web.label.auth.login.loginId"/></label>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input type="text" name="loginId" class="form-control input-sm" />
+                        <p class="help-block"><font color="red"><form:errors path="loginId" /></font></p>
+                    </div>
+                </div>
+            </div>
+            <label for="code" class="control-label col-sm-2"><spring:message code="web.label.auth.login.pass"/></label>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input type="text" name="pass" class="form-control input-sm" />
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="<spring:message code="web.label.create" />"  name="confirm" value="Confirm"  class="btn btn-primary">
+        </form:form>
     </div>
-    <div id="create">
-        <ul>
-            <form:form modelAttribute="authForm" action="auth/create">
-                <li><spring:message code="web.label.auth.loginId"/>:<c:out value="${auth.loginId}" /></li>
-                <li><spring:message code="web.label.auth.pass"/>:<c:out value="${auth.pass}" /></li>
-                <form:hidden path="loginId" />
-                <form:hidden path="pass" />
-            </form:form>
-        </ul>
-        <input type="submit" name="confirm" value="Confirm" />
-    </div>
-</body>
-</html>
+</div>
+
