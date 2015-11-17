@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import utility.MessageUtil;
@@ -41,35 +40,6 @@ public class AuthController {
     @ModelAttribute
     public AuthForm setUpAuthForm() {
         return new AuthForm();
-    }
-
-    /**
-     * ログイン処理<br>
-     * ログイン成功した場合、メニュー一覧へ遷移する.<br>
-     * ※ObjectにBindしないサンプル<br/>
-     * 
-     * @param form
-     * @return
-     */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(AuthForm form, Model model, Locale locale) {
-        String loginId = form.getLoginId();
-        String pass = form.getPass();
-
-        Auth auth = this.authService.login(loginId, pass);
-        if (auth != null) {
-            // ログインOK
-            return "redirect:/auth/list";
-        }
-        // ログインNG
-        model.addAttribute("error", this.messageSource.getMessage(MessageUtil.APP_MESSAGE_AUTH_LOGIN_ERROR, null, locale));
-        return "auth/index";
-    }
-
-    @RequestMapping(value = "/")
-    public String index(Model model) {
-        model.addAttribute("authForm", new AuthForm());
-        return "auth/index";
     }
 
     @RequestMapping(value = "list", method = GET)

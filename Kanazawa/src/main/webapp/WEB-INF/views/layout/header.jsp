@@ -22,8 +22,9 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
+				        <c:set var="applicationContextPath" value="${pageContext.request.contextPath}" />
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="/auth"><spring:message code="web.label.function.auth" /></a></li>
+					<li><a href="${applicationContextPath}/auth/list"><spring:message code="web.label.function.auth" /></a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</div>
