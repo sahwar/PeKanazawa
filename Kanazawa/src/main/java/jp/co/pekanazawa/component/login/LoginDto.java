@@ -1,6 +1,7 @@
 package jp.co.pekanazawa.component.login;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 public class LoginDto {
@@ -13,7 +14,10 @@ public class LoginDto {
     }
 
     public boolean isLogin() {
-        if (this.getId() <= 1 && this.getLoginId().length() >= 1) {
+
+        if (this.getId() <= 1 &&
+                (!StringUtils.isEmpty(this.getLoginId())) &&
+                this.getLoginId().length() >= 1) {
             return true;
         }
         return false;

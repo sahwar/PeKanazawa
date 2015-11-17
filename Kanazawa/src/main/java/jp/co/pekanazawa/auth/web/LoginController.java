@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import utility.MessageUtil;
 
 @Controller
+@RequestMapping("login")
 public class LoginController {
     @Autowired
     protected AuthService authService;
@@ -25,13 +26,13 @@ public class LoginController {
     @Autowired
     protected LoginDto loginDto;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("authForm", new AuthForm());
         return FormConst.LOGIN;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(AuthForm form, Model model, Locale locale) {
         String loginId = form.getLoginId();
         String pass = form.getPass();

@@ -16,7 +16,7 @@
 		        <c:out value="${error}" />
 		    </div>
 	        <div class="container" style="padding:20px 0">
-	                <form:form modelAttribute="authForm" action="login" class="form-horizontal" style="margin-bottom:15px">
+	                <form:form modelAttribute="authForm" action="${pageContext.request.contextPath}/login/login" class="form-horizontal" style="margin-bottom:15px">
 	                        <div class="form-group">
 	                                <label class="col-sm-2 control-label" for="email"><spring:message code="web.label.auth.login.loginId" /></label>
 	                                <div class="col-sm-4">

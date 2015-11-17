@@ -3,15 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
-         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        ">
 
-	<context:property-placeholder location="classpath:spring/*.properties" />
+	<context:property-placeholder location="classpath:*.properties" />
 
 	<context:annotation-config />
 
@@ -24,15 +29,16 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 
-	<context:component-scan base-package="jp.co.pekanazawa.auth.domain.*">
-		<context:include-filter type="regex"
-			expression=".*Service$" />
+	<context:component-scan base-package="jp.co.pekanazawa.auth.domain">
 	</context:component-scan>
-	<context:component-scan base-package="jp.co.pekanazawa.auth.web.*" >
-		<context:exclude-filter type="regex"
-			expression=".*Form$" />
+	<context:component-scan base-package="jp.co.pekanazawa.auth.web" >
 	</context:component-scan>
-
-    <context:component-scan base-package="jp.co.pekanazawa.component.login.*" />
     <aop:aspectj-autoproxy />
+    <context:component-scan base-package="jp.co.pekanazawa.component" />
+
+    <!-- Resource定義 -->
+    <util:map id="noRedirectUrlAndMethodMap" map-class="java.util.HashMap">
+        <entry key="jp.co.pekanazawa.auth.web.LoginController" value="index,login"/>
+    </util:map>
+
 </beans>

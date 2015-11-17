@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +22,7 @@ import utility.MessageUtil;
 import utility.PageForm;
 
 /**
- * Login処理<tr>
- * TODO 後でsecurityFilterを追加する
+ * 
  * @author Uto
  *
  */
@@ -37,10 +35,10 @@ public class AuthController {
     @Autowired
     protected MessageSource messageSource;
 
-    @ModelAttribute
-    public AuthForm setUpAuthForm() {
-        return new AuthForm();
-    }
+    //    @ModelAttribute
+    //    public AuthForm setUpAuthForm() {
+    //        return new AuthForm();
+    //    }
 
     @RequestMapping(value = "list", method = GET)
     public String list(@RequestParam(required = false, defaultValue = "1", name = "page") String page,
