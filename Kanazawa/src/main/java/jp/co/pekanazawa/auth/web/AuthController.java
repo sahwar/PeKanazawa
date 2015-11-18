@@ -35,11 +35,6 @@ public class AuthController {
     @Autowired
     protected MessageSource messageSource;
 
-    //    @ModelAttribute
-    //    public AuthForm setUpAuthForm() {
-    //        return new AuthForm();
-    //    }
-
     @RequestMapping(value = "list", method = GET)
     public String list(@RequestParam(required = false, defaultValue = "1", name = "page") String page,
             @RequestParam(required = false, defaultValue = "asc", name = "sort") String sort,
@@ -60,6 +55,48 @@ public class AuthController {
         return "auth/detail";
     }
 
+    @RequestMapping(value = "delete/{id}", method = GET)
+    public String delete(@PathVariable("id") String id, Model model, Locale locale) {
+        Auth auth = this.authService.findAuth(id);
+        if (auth == null) {
+            model.addAttribute("error", this.messageSource.getMessage(MessageUtil.APP_MESSAGE_AUTH_DETAIL_ERROR, null, locale));
+        } else {
+            this.authService.delete(auth.getId());
+        }
+        return this.list("1", "asc", model);
+    }
+
+    @RequestMapping(value = "update/{id}", method = GET)
+    public String update(@PathVariable("id") String id, Model model, Locale locale) {
+        Auth auth = this.authService.findAuth(id);
+        if (auth == null) {
+            model.addAttribute("error", this.messageSource.getMessage(MessageUtil.APP_MESSAGE_AUTH_DETAIL_ERROR, null, locale));
+            this.list("1", "asc", model);
+        }
+        model.addAttribute("auth", auth);
+        return "auth/update";
+    }
+
+    @RequestMapping(value = "update", params = "confirm")
+    public String updateConfirm(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
+        if (result.hasErrors()) {
+            return createRedo(form);
+        }
+        model.addAttribute("auth", form);
+        return "auth/updateConfirm";
+    }
+
+    @RequestMapping(value = "update", params = "update")
+    public String updateUpdate(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
+        // 既に存在するかをチェックする
+        if (result.hasErrors()) {
+            return createRedo(form);
+        }
+        // 登録処理
+        this.authService.update(form.getId(), form.getLoginId(), form.getPass());
+        return this.list("1", "asc", model);
+    }
+
     @RequestMapping(value = "create", params = "form")
     public String create(AuthForm form, Locale locale) {
         return "auth/create";
@@ -73,9 +110,7 @@ public class AuthController {
     @RequestMapping(value = "create", params = "confirm")
     public String createConfirm(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
         // 既に存在するかをチェックする
-        if (this.authService.findLoginId(form.getLoginId()) != null) {
-            result.rejectValue("loginId", MessageUtil.APP_MESSAGE_AUTH_OVERLAP_ERROR);
-        }
+        this.validate(this.authService, form, result);
         if (result.hasErrors()) {
             return createRedo(form);
         }
@@ -83,12 +118,16 @@ public class AuthController {
         return "auth/createConfirm";
     }
 
+    private void validate(AuthService authService, AuthForm form, BindingResult result) {
+        if (authService.findLoginId(form.getLoginId()) != null) {
+            result.rejectValue("loginId", MessageUtil.APP_MESSAGE_AUTH_OVERLAP_ERROR);
+        }
+    }
+
     @RequestMapping(value = "create", params = "update")
     public String createUpdate(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
         // 既に存在するかをチェックする
-        if (this.authService.findLoginId(form.getLoginId()) != null) {
-            result.rejectValue("loginId", MessageUtil.APP_MESSAGE_AUTH_OVERLAP_ERROR);
-        }
+        this.validate(this.authService, form, result);
         if (result.hasErrors()) {
             return createRedo(form);
         }

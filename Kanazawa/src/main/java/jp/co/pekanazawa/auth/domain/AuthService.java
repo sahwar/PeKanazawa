@@ -27,11 +27,15 @@ public class AuthService {
     }
 
     public Auth findAuth(String id) {
-        return this.authRepository.findById(Integer.valueOf(id));
+        return this.findAuth(Integer.valueOf(id));
+    }
+
+    public Auth findAuth(int id) {
+        return this.authRepository.findById(id);
     }
 
     public Page<Auth> findList(int page, List<String> sortKey, Sort.Direction sortType) {
-        return this.authRepository.findAll(new PageRequest(page, PageUtil.PAGE_NUM));
+        return this.authRepository.findByDeletedIsNull(new PageRequest(page, PageUtil.PAGE_NUM));
     }
 
     public Auth findLoginId(String loginId) {
@@ -46,8 +50,24 @@ public class AuthService {
         auth.setCreated(date);
         auth.setDeleted(null);
         auth.setUpdated(new Timestamp(date.getTime()));
-        auth = this.authRepository.save(auth);
-        this.authRepository.flush();
-        return auth;
+        return this.authRepository.saveAndFlush(auth);
+    }
+
+    public void update(int id, String loginId, String pass) {
+        Auth auth = this.authRepository.findOne(id);
+        auth.setLoginId(loginId);
+        auth.setPass(pass);
+        auth.setUpdated(new Timestamp(new Date().getTime()));
+        this.authRepository.saveAndFlush(auth);
+    }
+
+    public void delete(int id) {
+        // 論理削除
+        Auth auth = this.authRepository.findOne(id);
+        auth.setDeleted(new Date());
+        this.authRepository.saveAndFlush(auth);
+        // 物理削除
+        //        Auth auth = this.authRepository.findOne(id);
+        //        this.authRepository.delete(auth);
     }
 }
