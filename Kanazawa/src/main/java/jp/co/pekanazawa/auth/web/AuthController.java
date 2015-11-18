@@ -71,15 +71,30 @@ public class AuthController {
     }
 
     @RequestMapping(value = "create", params = "confirm")
-    public String createConfirm(@Validated AuthForm form, BindingResult result, Locale locale) {
+    public String createConfirm(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
         // 既に存在するかをチェックする
-        Auth auth = this.authService.findLoginId(form.getLoginId());
-        if (auth != null) {
+        if (this.authService.findLoginId(form.getLoginId()) != null) {
             result.rejectValue("loginId", MessageUtil.APP_MESSAGE_AUTH_OVERLAP_ERROR);
         }
         if (result.hasErrors()) {
             return createRedo(form);
         }
+        model.addAttribute("auth", form);
         return "auth/createConfirm";
     }
+
+    @RequestMapping(value = "create", params = "update")
+    public String createUpdate(@Validated AuthForm form, BindingResult result, Model model, Locale locale) {
+        // 既に存在するかをチェックする
+        if (this.authService.findLoginId(form.getLoginId()) != null) {
+            result.rejectValue("loginId", MessageUtil.APP_MESSAGE_AUTH_OVERLAP_ERROR);
+        }
+        if (result.hasErrors()) {
+            return createRedo(form);
+        }
+        // 登録処理
+        this.authService.save(form.getLoginId(), form.getPass());
+        return this.list("1", "asc", model);
+    }
+
 }

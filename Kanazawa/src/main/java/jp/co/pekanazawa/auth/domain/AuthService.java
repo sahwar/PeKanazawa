@@ -1,5 +1,7 @@
 package jp.co.pekanazawa.auth.domain;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import jp.co.pekanazawa.auth.domain.model.Auth;
@@ -34,5 +36,18 @@ public class AuthService {
 
     public Auth findLoginId(String loginId) {
         return this.authRepository.findByLoginId(loginId);
+    }
+
+    public Auth save(String loginId, String pass) {
+        Auth auth = new Auth();
+        auth.setLoginId(loginId);
+        auth.setPass(pass);
+        Date date = new Date();
+        auth.setCreated(date);
+        auth.setDeleted(null);
+        auth.setUpdated(new Timestamp(date.getTime()));
+        auth = this.authRepository.save(auth);
+        this.authRepository.flush();
+        return auth;
     }
 }

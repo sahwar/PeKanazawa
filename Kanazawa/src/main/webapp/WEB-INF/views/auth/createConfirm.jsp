@@ -1,26 +1,25 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>TODO </title>
-<link href="<c:url value="/resources/css/common.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-</head>
-<body>
-    <div id ="error">
-        <form:errors path="loinId" />
-        <form:errors path="pass" />
+<div class="row">
+     <div class="col-sm-push-2 col-sm-10"><h1><spring:message code="web.label.common.confirm"/></h1></div>
+</div>
+<form:form modelAttribute="authForm" action="create" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label"><spring:message code="web.label.auth.login.loginId"/></label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><c:out value="${auth.loginId}" /></p>
+            <input type="hidden" name="loginId" value="<c:out value='${auth.loginId}'/>" />
+        </div>
     </div>
-    <div id="create">
-        <ul>
-            <form:form modelAttribute="authForm" action="auth/create">
-                <li><spring:message code="web.label.auth.loginId"/>:<c:out value="${loginId}" /></li>
-                <li><spring:message code="web.label.auth.pass"/>:<c:out value="${pass}" /></li>
-            </form:form>
-        </ul>
-        <input type="submit" name="<spring:message code="web.label.common.redo"/>" value="Back" />
-        <input type="submit" name="<spring:message code="web.label.common.create"/>" value="Create" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label"><spring:message code="web.label.auth.login.pass"/></label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><c:out value="${auth.pass}" /></p>
+            <input type="hidden" name="pass" value="<c:out value='${auth.pass}'/>" />
+        </div>
     </div>
-</body>
-</html>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" name="update" value="Update"><spring:message code="web.label.common.create" /></button>
+            <p class="help-block">...</p>
+        </div>
+    </div>
+</form:form>

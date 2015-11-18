@@ -25,4 +25,4 @@
 <!-- pagenation -->
 <jsp:include page="../common/pagenation.jsp" />
 
-<input class="btn btn-default" type="button" value="<spring:message code="web.label.create"/>" onclick="location.href='${pageContext.request.contextPath}/auth/create?form'">
+<input class="btn btn-default" type="button" value="<spring:message code="web.label.common.create"/>" onclick="location.href='${pageContext.request.contextPath}/auth/create?form'">
