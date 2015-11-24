@@ -5,7 +5,6 @@ import java.util.Locale;
 import jp.co.pekanazawa.auth.domain.AuthService;
 import jp.co.pekanazawa.auth.domain.model.Auth;
 import jp.co.pekanazawa.auth.web.form.AuthForm;
-import jp.co.pekanazawa.common.login.LoginDto;
 import jp.co.pekanazawa.common.util.MessageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class LoginController {
     @Autowired
     protected MessageSource messageSource;
     @Autowired
-    protected LoginDto loginDto;
+    protected jp.co.pekanazawa.common.login.LoginDto loginDto;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(Model model) {

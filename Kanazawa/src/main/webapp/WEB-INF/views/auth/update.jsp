@@ -6,6 +6,7 @@
     <div class="col-xs-12">
         <form:form modelAttribute="authForm" action="${pageContext.request.contextPath}/auth/update?confirm" class="form-horizontal cst-form-inputform">
             <input type="hidden" name="id" value="<c:out value='${auth.id}'/>" />
+            <!-- 
             <spring:hasBindErrors name="authForm">
                 <div class="alert alert-danger">
                     <spring:bind path="authForm">
@@ -15,7 +16,8 @@
                     </spring:bind>
                 </div>
             </spring:hasBindErrors>
-                            
+             -->
+             
             <label for="code" class="control-label col-sm-2"><spring:message code="web.label.auth.login.loginId"/></label>
             <div class="col-sm-10">
                 <div class="row">

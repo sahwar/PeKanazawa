@@ -25,7 +25,11 @@
 	<!-- message source -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:/i18n/message" />
+		<property name="basenames">
+		  <list>
+              <value>classpath:/i18n/message</value>
+		  </list>
+		</property>
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 

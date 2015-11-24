@@ -5,6 +5,7 @@
 <div class="row">
     <div class="col-xs-12">
         <form:form modelAttribute="authForm" action="create" class="form-horizontal cst-form-inputform">
+            <!-- 
             <spring:hasBindErrors name="authForm">
                 <div class="alert alert-danger">
                     <spring:bind path="authForm">
@@ -14,6 +15,7 @@
                     </spring:bind>
                 </div>
             </spring:hasBindErrors>
+            -->
                             
             <label for="code" class="control-label col-sm-2"><spring:message code="web.label.auth.login.loginId"/></label>
             <div class="col-sm-10">
@@ -29,6 +31,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <input type="text" name="pass" class="form-control input-sm" />
+                        <p class="help-block"><font color="red"><form:errors path="pass" /></font></p>
                     </div>
                 </div>
             </div>
